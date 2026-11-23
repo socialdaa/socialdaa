@@ -9,6 +9,7 @@ import {
   // StatementSection,
   UrgencySection,
   ProcessSection,
+  FaqSection,
   AudienceSection,
   WorkSection,
   // FounderSection,
@@ -70,6 +71,7 @@ function Home() {
       {/* <StatementSection /> */}
       <UrgencySection />
       <ProcessSection />
+      <FaqSection />
 
       {/* <BenefitsSection /> */}
       <TestimonialsSection />

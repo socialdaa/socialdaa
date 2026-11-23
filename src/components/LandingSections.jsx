@@ -33,7 +33,7 @@ export function UrgencySection() {
       before: "0",
       after: "100K",
       growth: "100K",
-      timeline: "1 Month",
+      timeline: "1 month",
       initials: "GR",
       image: glowRoshImage,
     },
@@ -47,7 +47,7 @@ export function UrgencySection() {
       before: "0",
       after: "100K",
       growth: "100K",
-      timeline: "3 Months",
+      timeline: "3 months",
       initials: "CR",
       image: coachRakaniyaImage,
     },
@@ -61,7 +61,7 @@ export function UrgencySection() {
       before: "0",
       after: "100K",
       growth: "100K",
-      timeline: "13 Reels",
+      timeline: "13 reels",
       initials: "DM",
       image: drMokanalakshmiImage,
     },
@@ -75,11 +75,10 @@ export function UrgencySection() {
       before: "0",
       after: "100K",
       growth: "100K",
-      timeline: "2 Months",
+      timeline: "2 months",
       initials: "DH",
       image: drHananImage,
     },
-
     {
       name: "arunannadurai_official",
       role: "Arun Annadurai · Digital Creator",
@@ -90,7 +89,7 @@ export function UrgencySection() {
       before: "42K",
       after: "100K",
       growth: "58K",
-      timeline: "3 Months",
+      timeline: "6 months",
       initials: "AA",
       image: arunAnnaduraiImage,
     },
@@ -104,39 +103,271 @@ export function UrgencySection() {
       before: "0",
       after: "100K",
       growth: "100K",
-      timeline: "3 Months",
+      timeline: "3 months",
       initials: "MK",
       image: madhuKumareshImage,
     },
     {
-      name: "dr.swati_netaji",
-      role: "Dr. Swati Netaji · Dermatologist",
-      experience: "Dermatology | Cosmetology",
-      posts: "250 posts",
-      followers: "300K followers",
-      following: "50 following",
-      before: "10K",
-      after: "100K",
-      growth: "90K",
-      timeline: "6 Months",
+      name: "dr.chen_yourgutbuddy",
+      role: "Chenduran Suguna Navaladi Kirthi",
+      experience: "Gastroenterology & Advanced Therapeutic Endoscopy",
+      posts: "78 posts",
+      followers: "135K followers",
+      following: "0 following",
+      before: "0",
+      after: "135K",
+      growth: "135K",
+      timeline: "3 months",
+      initials: "DC",
+    },
+    {
+      name: "drramyaja_smiles",
+      role: "Dr Ramyaja Shusruth",
+      experience: "Smile Specialist · Orthodontist",
+      posts: "88 posts",
+      followers: "95.8K followers",
+      following: "2 following",
+      before: "0",
+      after: "95.8K",
+      growth: "95.8K",
+      timeline: "1.5 months",
+      timelineIsIllustrative: true,
+      initials: "DR",
+    },
+    {
+      name: "drsmahalakshmi",
+      role: "Dr Mahalakshmi S",
+      experience: "Fertility Doctor · Reproductive Medicine",
+      posts: "229 posts",
+      followers: "168K followers",
+      following: "0 following",
+      before: "0",
+      after: "168K",
+      growth: "168K",
+      timeline: "100K in 17 reels",
+      timelineIsIllustrative: true,
+      initials: "DM",
+    },
+    {
+      name: "varifiedva",
+      role: "Ari · Vardhini",
+      experience: "Love & Growth",
+      posts: "126 posts",
+      followers: "56.6K followers",
+      following: "8 following",
+      before: "0",
+      after: "56.6K",
+      growth: "56.6K",
+      timeline: "1 month",
+      timelineIsIllustrative: true,
+      initials: "VV",
+    },
+    {
+      name: "dr.manodarshini_manimaran",
+      role: "Dr Manodarshini Manimaran",
+      experience: "Obstetrician & Gynecologist",
+      posts: "71 posts",
+      followers: "54.3K followers",
+      following: "4 following",
+      before: "0",
+      after: "54.3K",
+      growth: "54.3K",
+      timeline: "2 months",
+      timelineIsIllustrative: true,
+      initials: "DM",
+    },
+    {
+      name: "naren_sage",
+      role: "Naren",
+      experience: "Founder · Sage Hair Studio",
+      posts: "119 posts",
+      followers: "152K followers",
+      following: "3 following",
+      before: "0",
+      after: "152K",
+      growth: "152K",
+      timeline: "6 months",
+      initials: "NS",
+    },
+    {
+      name: "karupatti_murali",
+      role: "Murali Tharsan",
+      experience: "Founder · Karupatti Coffee Brand",
+      posts: "16 posts",
+      followers: "13.1K followers",
+      following: "2 following",
+      before: "0",
+      after: "13.1K",
+      growth: "13.1K",
+      timeline: "1 month",
+      timelineIsIllustrative: true,
+      initials: "KM",
+    },
+    {
+      name: "diademstore.in",
+      role: "Diadem",
+      experience: "Silk Sarees · Bridal Sarees · Lehengas",
+      posts: "5,119 posts",
+      followers: "153K followers",
+      following: "7 following",
+      before: "0",
+      after: "153K",
+      growth: "153K",
+      timeline: "100K in 30 reels",
+      timelineIsIllustrative: true,
       initials: "DS",
+    },
+    {
+      name: "nutritionist_sandhyamanian",
+      role: "Sandhya Manian",
+      experience: "Holistic Nutritionist",
+      posts: "932 posts",
+      followers: "120K followers",
+      following: "1,636 following",
+      before: "0",
+      after: "120K",
+      growth: "120K",
+      timeline: "3 months",
+      timelineIsIllustrative: true,
+      initials: "NS",
+    },
+    {
+      name: "suchitra_raghavan",
+      role: "Suchitra Raghavan",
+      experience: "Founder · Kalki Artz",
+      posts: "77 posts",
+      followers: "46.8K followers",
+      following: "1 following",
+      before: "0",
+      after: "46.8K",
+      growth: "46.8K",
+      timeline: "1.5 months",
+      timelineIsIllustrative: true,
+      initials: "SR",
+    },
+    {
+      name: "choice.of.sudha",
+      role: "Choice of Sudha",
+      experience: "Boutique Collection · Personalized Designs",
+      posts: "47 posts",
+      followers: "40K followers",
+      following: "1 following",
+      before: "0",
+      after: "40K",
+      growth: "40K",
+      timeline: "1 month",
+      timelineIsIllustrative: true,
+      initials: "CS",
+    },
+    {
+      name: "drlokesh_plasticsurgeon",
+      role: "Dr Lokesh Suryanarayanan",
+      experience: "Plastic & Reconstructive Surgeon",
+      posts: "204 posts",
+      followers: "159K followers",
+      following: "0 following",
+      before: "0",
+      after: "159K",
+      growth: "159K",
+      timeline: "150 videos",
+      initials: "DL",
+    },
+    {
+      name: "dr_nishaa",
+      role: "Nisha R Srinivas",
+      experience: "Dermatologist · Board Certified",
+      posts: "1,278 posts",
+      followers: "153K followers",
+      following: "1,848 following",
+      before: "0",
+      after: "153K",
+      growth: "153K",
+      timeline: "100K in 25 reels",
+      timelineIsIllustrative: true,
+      initials: "DN",
+    },
+    {
+      name: "shreevarma_tamil",
+      role: "Shreevarma Tamil",
+      experience: "Integrated Healing & Wellness",
+      posts: "2,680 posts",
+      followers: "210K followers",
+      following: "113 following",
+      before: "0",
+      after: "210K",
+      growth: "210K",
+      timeline: "6 months",
+      timelineIsIllustrative: true,
+      initials: "ST",
+    },
+    {
+      name: "_growwithmani",
+      role: "GrowWithMani",
+      experience: "Founder & CEO · Financial Services",
+      posts: "199 posts",
+      followers: "64K followers",
+      following: "0 following",
+      before: "0",
+      after: "64K",
+      growth: "64K",
+      timeline: "2 months",
+      timelineIsIllustrative: true,
+      initials: "GM",
+    },
+    {
+      name: "dr.swati_nethaji",
+      role: "Dr Swati Nethaji",
+      experience: "Obstetrician · Laparoscopic Surgeon",
+      posts: "206 posts",
+      followers: "206K followers",
+      following: "2 following",
+      before: "0",
+      after: "206K",
+      growth: "206K",
+      timeline: "5 months",
+      initials: "DN",
       image: drSwatiImage,
+    },
+    {
+      name: "pothys.ramesh",
+      role: "Sadayandi Ramesh Pothy",
+      experience: "Managing Director · Pothys",
+      posts: "17 posts",
+      followers: "48.7K followers",
+      following: "18 following",
+      before: "0",
+      after: "48.7K",
+      growth: "48.7K",
+      timeline: "1 month",
+      timelineIsIllustrative: true,
+      initials: "PR",
+    },
+    {
+      name: "iamdoctorfarmer",
+      role: "Dr Prabhakar Raj",
+      experience: "Doctor · Founder & Mentor",
+      posts: "606 posts",
+      followers: "620K followers",
+      following: "443 following",
+      before: "0",
+      after: "620K",
+      growth: "620K",
+      timeline: "6 months",
+      timelineIsIllustrative: true,
+      initials: "DF",
     },
     {
       name: "Dr. Abinaya Vijayan",
       role: "Fertility Specialist",
       experience: "Medical expertise to a trusted brand",
       posts: "29 reels",
-      followers: "100K followers",
+      followers: "202K followers",
       following: "Growing organically",
       before: "31K",
       after: "202K",
       growth: "171K",
-      timeline: "29 Reels",
-      // views: "35K Followers in 2 Days",
-      // niche: "Medical Authority",
-      // reel: "High-Impact Reels",
-      // initials: "AV",
+      timeline: "29 reels",
+      initials: "AV",
     },
     {
       name: "Tech with Kavitha",
@@ -148,21 +379,37 @@ export function UrgencySection() {
       before: "0",
       after: "100K",
       growth: "100K",
-      timeline: "6 Months",
-      // views: "Consistent Organic Reach",
-      // niche: "Category Expertise",
-      // reel: "Educational Reels",
-      // initials: "TK",
+      timeline: "100K in 17 videos",
+      timelineIsIllustrative: true,
+      initials: "TK",
     },
   ];
 
   const [growthIndex, setGrowthIndex] = useState(0);
+  const [isGrowthHovered, setIsGrowthHovered] = useState(false);
+  const [isGrowthFocused, setIsGrowthFocused] = useState(false);
 
   const moveGrowthCase = (step) => {
     setGrowthIndex(
       (current) => (current + step + growthCases.length) % growthCases.length,
     );
   };
+
+  useEffect(() => {
+    if (
+      isGrowthHovered ||
+      isGrowthFocused ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setGrowthIndex((current) => (current + 1) % growthCases.length);
+    }, 6000);
+
+    return () => window.clearInterval(intervalId);
+  }, [growthCases.length, isGrowthFocused, isGrowthHovered]);
 
   const item = growthCases[growthIndex];
 
@@ -178,7 +425,17 @@ export function UrgencySection() {
             </h2>
           </div>
 
-          <div className="growth-case-wrap">
+          <div
+            className="growth-case-wrap"
+            onMouseEnter={() => setIsGrowthHovered(true)}
+            onMouseLeave={() => setIsGrowthHovered(false)}
+            onFocusCapture={() => setIsGrowthFocused(true)}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setIsGrowthFocused(false);
+              }
+            }}
+          >
             <div className="growth-case-heading">Our works</div>
             <article className="growth-case" key={item.name}>
               <div className="growth-profile">
@@ -228,23 +485,17 @@ export function UrgencySection() {
                 </div>
                 <div>
                   <small>TIMELINE</small>
-                  <strong>{item.timeline}</strong>
+                  <strong className="growth-timeline">{item.timeline}</strong>
                   <span className="growth-pink">RESULT</span>
                 </div>
               </div>
 
               <div className="growth-controls">
-                <div>
-                  {growthCases.map((caseItem, index) => (
-                    <button
-                      type="button"
-                      className={index === growthIndex ? "active" : ""}
-                      key={caseItem.name}
-                      aria-label={`Show ${caseItem.name} growth case`}
-                      onClick={() => setGrowthIndex(index)}
-                    />
-                  ))}
-                </div>
+                <span className="growth-progress">
+                  {String(growthIndex + 1).padStart(2, "0")}
+                  <span aria-hidden="true"> / </span>
+                  {String(growthCases.length).padStart(2, "0")}
+                </span>
                 <span>
                   <button
                     type="button"
@@ -325,6 +576,70 @@ export function ProcessSection() {
             Like How Thalaivar says “Enga Valzhi thami vazhi”
             <span>we do it in our own unique way!</span>
           </blockquote>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function FaqSection() {
+  const faqs = [
+    {
+      question: "What does Socialdaa do?",
+      answer:
+        "Socialdaa helps founders and professionals build an organic Instagram presence through strategy, scripting, shoot planning, editing and consistent content publishing.",
+    },
+    {
+      question: "Do I need to be confident on camera?",
+      answer:
+        "No. Our team guides you through the process on shoot day, from ideas and delivery to camera angles and retakes, so you can stay natural and comfortable.",
+    },
+    {
+      question: "Will the content sound like me?",
+      answer:
+        "Yes. We work with your real voice, experience and expertise, then shape it into clear scripts and content formats your audience can understand.",
+    },
+    {
+      question: "How often do you create content?",
+      answer:
+        "The content schedule is planned around your goals and availability. We agree on the shooting and publishing cadence before starting, so expectations are clear.",
+    },
+    {
+      question: "Can Socialdaa guarantee follower growth?",
+      answer:
+        "No one can guarantee a specific result. Growth depends on your niche, consistency, content quality and audience response. Our role is to create and manage a strong, repeatable system.",
+    },
+    {
+      question: "How do I apply to work with Socialdaa?",
+      answer:
+        "Select “Apply Now” and complete the short application form. Our team will review your profile and get in touch if we believe it is a strong fit.",
+    },
+  ];
+
+  return (
+    <section className="faq-section" id="faq">
+      <div className="wrap">
+        <div className="faq-heading">
+          <div>
+            <div className="eyebrow">Frequently asked questions</div>
+            <h2>Questions, answered.</h2>
+          </div>
+          <p>
+            Everything you need to know before taking the next step with
+            Socialdaa.
+          </p>
+        </div>
+
+        <div className="faq-list">
+          {faqs.map((faq, index) => (
+            <details className="faq-item" key={faq.question} open={index === 0}>
+              <summary>
+                <span>{faq.question}</span>
+                <span className="faq-icon" aria-hidden="true" />
+              </summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
