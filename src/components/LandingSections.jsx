@@ -721,7 +721,9 @@ export function WorkSection({ onApply }) {
     },
   ];
 
-  const [playingIndex, setPlayingIndex] = useState(-1);
+  const [playingVideos, setPlayingVideos] = useState(() => new Set());
+  const [soundIndex, setSoundIndex] = useState(-1);
+  const [failedVideos, setFailedVideos] = useState(() => new Set());
   const [canScrollPrevious, setCanScrollPrevious] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
   const reelsRef = useRef(null);
@@ -746,6 +748,37 @@ export function WorkSection({ onApply }) {
     };
   }, []);
 
+  useEffect(() => {
+    const reels = reelsRef.current;
+    if (!reels) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          const index = Number(video.dataset.index);
+
+          if (entry.isIntersecting) {
+            video.play().catch((error) => {
+              if (error.name !== "AbortError") {
+                console.warn("Could not autoplay testimonial video.", error);
+              }
+            });
+          } else {
+            video.pause();
+            video.muted = true;
+            setSoundIndex((current) => (current === index ? -1 : current));
+          }
+        });
+      },
+      { root: reels, threshold: 0.25 },
+    );
+
+    reels.querySelectorAll("video").forEach((video) => observer.observe(video));
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollReels = (direction) => {
     const reels = reelsRef.current;
     const firstReel = reels?.querySelector(".reel");
@@ -764,73 +797,133 @@ export function WorkSection({ onApply }) {
     const video = reel?.querySelector("video");
     if (!video) return;
 
-    document.querySelectorAll(".reel video").forEach((otherVideo) => {
-      if (otherVideo !== video) otherVideo.pause();
-    });
-
     if (video.paused) {
+      reelsRef.current?.querySelectorAll(".reel video").forEach((otherVideo) => {
+        if (otherVideo !== video) {
+          otherVideo.pause();
+          otherVideo.muted = true;
+        }
+      });
       video.muted = false;
-      video.controls = true;
+      setSoundIndex(index);
       video
         .play()
-        .then(() => setPlayingIndex(index))
-        .catch(() => {});
+        .catch((error) => {
+          video.muted = true;
+          setSoundIndex((current) => (current === index ? -1 : current));
+          if (error.name !== "AbortError") {
+            console.error("Could not play testimonial video with sound.", error);
+          }
+        });
     } else {
       video.pause();
-      setPlayingIndex(-1);
+      video.muted = true;
+      setSoundIndex((current) => (current === index ? -1 : current));
+    }
+  };
+
+  const toggleSound = (event, index) => {
+    event.stopPropagation();
+    const video = reelsRef.current?.querySelectorAll(".reel video")[index];
+    if (!video) return;
+
+    if (!video.muted) {
+      video.muted = true;
+      setSoundIndex(-1);
+      return;
+    }
+
+    reelsRef.current?.querySelectorAll(".reel video").forEach((otherVideo) => {
+      otherVideo.muted = otherVideo !== video;
+    });
+    setSoundIndex(index);
+
+    if (video.paused) {
+      video.play().catch((error) => {
+        video.muted = true;
+        setSoundIndex((current) => (current === index ? -1 : current));
+        if (error.name !== "AbortError") {
+          console.error("Could not play testimonial video with sound.", error);
+        }
+      });
     }
   };
 
   return (
     <section className="center-section work-section" id="work">
       <div className="wrap">
-        <div className="eyebrow">Client milestone videos</div>
-        <h2>
-          The growth they achieved{" "}
-          <span className="highlight">with Socialdaa.</span>
-        </h2>
+        <h2>Our Work.</h2>
+        <p className="work-subtitle">
+          Our curated variety of short-form contents.
+        </p>
         <div className="reels-frame">
           <div className="reels" ref={reelsRef}>
             {videos.map((video, index) => (
               <div
                 className="reel"
                 key={video.src}
-                role="button"
-                tabIndex={0}
                 onClick={(event) => {
-                  if (event.target.tagName === "VIDEO") return;
-                  togglePlayback(event, index);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    togglePlayback(event, index);
-                  }
+                  if (!failedVideos.has(index)) togglePlayback(event, index);
                 }}
               >
                 <video
                   src={video.src}
+                  data-index={index}
                   muted
+                  autoPlay
                   loop
                   playsInline
                   preload="metadata"
                   aria-label={`${video.name} testimonial video`}
-                  onPlay={() => setPlayingIndex(index)}
-                  onPause={() =>
-                    setPlayingIndex((current) =>
-                      current === index ? -1 : current,
-                    )
+                  onPlay={() =>
+                    setPlayingVideos((current) => new Set(current).add(index))
                   }
+                  onError={(event) => {
+                    setFailedVideos((current) => new Set(current).add(index));
+                    console.error(
+                      "Could not load testimonial video.",
+                      event.currentTarget.currentSrc,
+                    );
+                  }}
+                  onPause={() => {
+                    setPlayingVideos((current) => {
+                      const next = new Set(current);
+                      next.delete(index);
+                      return next;
+                    });
+                    setSoundIndex((current) =>
+                      current === index ? -1 : current,
+                    );
+                  }}
                 />
-                <span className="recording">
-                  <b />
-                  REC
-                </span>
-                <span
-                  className={`reel-play ${playingIndex === index ? "hidden" : ""}`}
-                >
-                  ▶
-                </span>
+                {failedVideos.has(index) ? (
+                  <span className="reel-error" role="status">
+                    Video temporarily unavailable
+                  </span>
+                ) : (
+                  <>
+                    <button
+                      className={`reel-play ${playingVideos.has(index) ? "is-playing" : ""}`}
+                      type="button"
+                      aria-label={
+                        playingVideos.has(index)
+                          ? `Pause ${video.name} video`
+                          : `Play ${video.name} video`
+                      }
+                      onClick={(event) => togglePlayback(event, index)}
+                    >
+                      {playingVideos.has(index) ? "Ⅱ" : "▶"}
+                    </button>
+                    <button
+                      className="reel-sound"
+                      type="button"
+                      aria-pressed={soundIndex === index}
+                      onClick={(event) => toggleSound(event, index)}
+                    >
+                      {soundIndex === index ? "Mute" : "Unmute"}
+                    </button>
+                  </>
+                )}
                 <span className="reel-caption">
                   <strong>{video.name}</strong>
                   <small>{video.role}</small>
@@ -858,7 +951,9 @@ export function WorkSection({ onApply }) {
             →
           </button>
         </div>
-        <p className="tap">Tap a milestone to watch their story with sound</p>
+        <p className="tap">
+          Videos autoplay muted. Select Unmute to hear the sound.
+        </p>
         <button className="btn" onClick={onApply}>
           Apply Now
         </button>
