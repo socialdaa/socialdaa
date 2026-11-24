@@ -704,21 +704,21 @@ export function WorkSection({ onApply }) {
     //   role: "Dermatologist",
     //   src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/100K%20isnt%20luck.%20Its%20consistency_Congratulations%20maam%20@dr.suryaderm!%E2%9D%A4%EF%B8%8FHappy%20to%20witness%20this%20j.mp4?updatedAt=1795070949728",
     // },
-    // {
-    //   name: "Arun Annadurai",
-    //   role: "Creator & Entrepreneur",
-    //   src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/Wholesome%20100k%20_%E2%9D%A4%EF%B8%8F_%20@arunannadurai_official%20Next%20Stop%20500k!%20Poiteeeey%20irukanum.One%20of%20our%20fav%20.mp4?updatedAt=1795255637223",
-    // },
-    // {
-    //   name: "Dr. Sakthivel Sivasubramanian",
-    //   role: "Chief Endocrinologist",
-    //   src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/100k%20in%2013%20Reels%20_%E2%9D%A4%EF%B8%8FSakthiiii%20sir%20you%20beauty!%20The%20Universe%20gave%20you%20what%20you%20exactly%20wanted.You.mp4?updatedAt=1795255810768",
-    // },
-    // {
-    //   name: "Dr. Siva Priya",
-    //   role: "Aesthetic Doctor",
-    //   src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/Atlast%20100k%20Family%20%E2%9D%A4%EF%B8%8FWasnt%20a%20easy%20ride%20but%20we%20made%20it%20look%20easy.Your%20Fun%20,%20Energy%20,%20Enthusiasm%20.mp4?updatedAt=1795256381883",
-    // },
+    {
+      name: "Arun Annadurai",
+      role: "Creator & Entrepreneur",
+      src: "https://ik.imagekit.io/qhgdd0289/New%20Folder/Wholesome%20100k%20_%E2%9D%A4%EF%B8%8F_%20@arunannadurai_official%20Next%20Stop%20500k!%20Poiteeeey%20irukanum.One%20of%20our%20fav%20.mp4",
+    },
+    {
+      name: "Dr. Sakthivel Sivasubramanian",
+      role: "Chief Endocrinologist",
+      src: "https://ik.imagekit.io/qhgdd0289/New%20Folder/100k%20in%2013%20Reels%20_%E2%9D%A4%EF%B8%8FSakthiiii%20sir%20you%20beauty!%20The%20Universe%20gave%20you%20what%20you%20exactly%20wanted.You.mp4",
+    },
+    {
+      name: "Dr. Siva Priya",
+      role: "Aesthetic Doctor",
+      src: "https://ik.imagekit.io/qhgdd0289/New%20Folder/Atlast%20100k%20Family%20%E2%9D%A4%EF%B8%8FWasnt%20a%20easy%20ride%20but%20we%20made%20it%20look%20easy.Your%20Fun%20,%20Energy%20,%20Enthusiasm%20.mp4",
+    },
   ];
 
   const [playingIndex, setPlayingIndex] = useState(-1);
