@@ -242,24 +242,6 @@ section {
   position: relative;
   margin: 48px auto 0;
 }
-.reels-frame::before,
-.reels-frame::after {
-  position: absolute;
-  z-index: 4;
-  top: 0;
-  bottom: 0;
-  width: 56px;
-  content: "";
-  pointer-events: none;
-}
-.reels-frame::before {
-  left: 0;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.88), transparent);
-}
-.reels-frame::after {
-  right: 0;
-  background: linear-gradient(270deg, rgba(0, 0, 0, 0.88), transparent);
-}
 .reels {
   display: grid;
   grid-template-columns: none;
