@@ -789,53 +789,55 @@ export function WorkSection({ onApply }) {
           The growth they achieved{" "}
           <span className="highlight">with Socialdaa.</span>
         </h2>
-        <div className="reels" ref={reelsRef}>
-          {videos.map((video, index) => (
-            <div
-              className="reel"
-              key={video.src}
-              role="button"
-              tabIndex={0}
-              onClick={(event) => {
-                if (event.target.tagName === "VIDEO") return;
-                togglePlayback(event, index);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
+        <div className="reels-frame">
+          <div className="reels" ref={reelsRef}>
+            {videos.map((video, index) => (
+              <div
+                className="reel"
+                key={video.src}
+                role="button"
+                tabIndex={0}
+                onClick={(event) => {
+                  if (event.target.tagName === "VIDEO") return;
                   togglePlayback(event, index);
-                }
-              }}
-            >
-              <video
-                src={video.src}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label={`${video.name} testimonial video`}
-                onPlay={() => setPlayingIndex(index)}
-                onPause={() =>
-                  setPlayingIndex((current) =>
-                    current === index ? -1 : current,
-                  )
-                }
-              />
-              <span className="recording">
-                <b />
-                REC
-              </span>
-              <span
-                className={`reel-play ${playingIndex === index ? "hidden" : ""}`}
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    togglePlayback(event, index);
+                  }
+                }}
               >
-                ▶
-              </span>
-              <span className="reel-caption">
-                <strong>{video.name}</strong>
-                <small>{video.role}</small>
-              </span>
-            </div>
-          ))}
+                <video
+                  src={video.src}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={`${video.name} testimonial video`}
+                  onPlay={() => setPlayingIndex(index)}
+                  onPause={() =>
+                    setPlayingIndex((current) =>
+                      current === index ? -1 : current,
+                    )
+                  }
+                />
+                <span className="recording">
+                  <b />
+                  REC
+                </span>
+                <span
+                  className={`reel-play ${playingIndex === index ? "hidden" : ""}`}
+                >
+                  ▶
+                </span>
+                <span className="reel-caption">
+                  <strong>{video.name}</strong>
+                  <small>{video.role}</small>
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="work-carousel-controls" aria-label="Video carousel">
           <button
