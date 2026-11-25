@@ -149,6 +149,91 @@
   color: var(--dashboard-gold);
 }
 
+.dashboard-logout-button {
+  padding: 8px 12px;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 6px;
+  background: transparent;
+  color: #c4bdcf;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dashboard-logout-button:hover {
+  border-color: var(--dashboard-gold);
+  color: var(--dashboard-gold);
+}
+
+.dashboard-login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(600px 360px at 50% 0, rgba(152, 118, 236, 0.1), transparent),
+    #09090d;
+  color: #f4f2f8;
+}
+
+.dashboard-login-card {
+  width: min(100%, 420px);
+  padding: 34px;
+  border: 1px solid #24232b;
+  border-radius: 12px;
+  background: #111116;
+}
+
+.dashboard-login-card .dashboard-logo {
+  display: inline-block;
+  margin: 0 0 36px;
+}
+
+.dashboard-login-card h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+}
+
+.dashboard-login-card > p:not(.dashboard-eyebrow, .dashboard-error) {
+  margin: 0 0 24px;
+  color: #92909d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.dashboard-login-card label {
+  display: block;
+  margin-bottom: 8px;
+  color: #c4bdcf;
+  font-size: 12px;
+}
+
+.dashboard-login-card input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid #34323c;
+  border-radius: 6px;
+  background: #09090d;
+  color: #f4f2f8;
+}
+
+.dashboard-login-button {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--dashboard-gold);
+  color: #111116;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dashboard-login-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
 .dashboard-content {
   width: min(100%, 1440px);
   margin: 0 auto;
@@ -621,6 +706,8 @@
 .dashboard-export-button:focus-visible,
 .dashboard-nav-item:focus-visible,
 .dashboard-website-link:focus-visible,
+.dashboard-logout-button:focus-visible,
+.dashboard-login-button:focus-visible,
 .dashboard-empty-link:focus-visible {
   outline: 2px solid var(--dashboard-gold);
   outline-offset: 3px;

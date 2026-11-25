@@ -7,6 +7,7 @@ export default function ApplicationOverlay({ open, onClose }) {
 
   const [step, setStep] = useState(1);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [leadData, setLeadData] = useState({
     name: "",
@@ -60,6 +61,7 @@ export default function ApplicationOverlay({ open, onClose }) {
         revenue: "",
         budget: "",
       });
+      setIsSubmitting(false);
     }
   }, [open]);
 
@@ -122,7 +124,7 @@ export default function ApplicationOverlay({ open, onClose }) {
   }
 
   // STEP 3: FINAL SUBMISSION
-  function submit(event) {
+  async function submit(event) {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
@@ -161,13 +163,19 @@ export default function ApplicationOverlay({ open, onClose }) {
       budget,
     };
 
+    setIsSubmitting(true);
     try {
-      saveLead(finalApplicationData);
-    } catch {
-      setError("We couldn't save your application. Please try again.");
+      await saveLead(finalApplicationData);
+    } catch (submissionError) {
+      setError(
+        submissionError.message ||
+          "We couldn't submit your application. Please check your connection and try again.",
+      );
+      setIsSubmitting(false);
       return;
     }
 
+    setIsSubmitting(false);
     setError("");
 
     // Google Analytics tracking
@@ -450,8 +458,10 @@ export default function ApplicationOverlay({ open, onClose }) {
             <button
               className="btn form-submit application-primary-action"
               type="submit"
+              disabled={isSubmitting}
             >
-              Submit Application <span>→</span>
+              {isSubmitting ? "Submitting..." : "Submit Application"}{" "}
+              {!isSubmitting && <span>→</span>}
             </button>
           </form>
         )}

@@ -1,24 +1,13 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  LEADS_CHANGED_EVENT,
+  migrateLocalLeads,
   readLeads,
   updateLeadStatus,
 } from "../leads.js";
 import "./LeadsDashboard.css";
 
 const statuses = ["New", "Contacted", "Qualified", "Not a fit"];
-
-function getInitialLeads() {
-  try {
-    return { leads: readLeads(), error: "" };
-  } catch {
-    return {
-      leads: [],
-      error: "Saved leads couldn't be loaded. Check this browser's local storage.",
-    };
-  }
-}
 
 function formatDate(value) {
   return new Intl.DateTimeFormat("en-IN", {
@@ -32,37 +21,87 @@ function escapeCsv(value) {
 }
 
 export default function LeadsDashboard() {
-  const [initialData] = useState(getInitialLeads);
-  const [leads, setLeads] = useState(initialData.leads);
-  const [error, setError] = useState(initialData.error);
+  const [leads, setLeads] = useState([]);
+  const [accessKey, setAccessKey] = useState(
+    () => window.sessionStorage.getItem("socialdaa-dashboard-key") || "",
+  );
+  const [accessCode, setAccessCode] = useState("");
+  const [authenticated, setAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All leads");
   const [expandedLeadId, setExpandedLeadId] = useState(null);
 
   useEffect(() => {
-    const refreshLeads = () => {
+    if (!accessKey) return undefined;
+
+    let active = true;
+    let migrationComplete = false;
+    const refreshLeads = async () => {
       try {
-        setLeads(readLeads());
+        if (!migrationComplete) {
+          await migrateLocalLeads(accessKey);
+          migrationComplete = true;
+        }
+        const sharedLeads = await readLeads(accessKey);
+        if (!active) return;
+        setLeads(sharedLeads);
+        setAuthenticated(true);
         setError("");
-      } catch {
-        setError("Saved leads couldn't be loaded. Check this browser's local storage.");
+      } catch (loadError) {
+        if (!active) return;
+        setError(loadError.message || "Shared leads couldn't be loaded.");
+        if (loadError.message === "Invalid dashboard access code.") {
+          window.sessionStorage.removeItem("socialdaa-dashboard-key");
+          setAccessKey("");
+          setAuthenticated(false);
+        }
       }
     };
 
-    const handleStorage = (event) => {
-      if (event.key === "socialdaa-leads") refreshLeads();
-    };
-
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener(LEADS_CHANGED_EVENT, refreshLeads);
+    setIsLoading(true);
+    refreshLeads().finally(() => {
+      if (active) setIsLoading(false);
+    });
+    const refreshInterval = window.setInterval(refreshLeads, 30000);
     window.addEventListener("focus", refreshLeads);
 
     return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener(LEADS_CHANGED_EVENT, refreshLeads);
+      active = false;
+      window.clearInterval(refreshInterval);
       window.removeEventListener("focus", refreshLeads);
     };
-  }, []);
+  }, [accessKey]);
+
+  async function submitAccessCode(event) {
+    event.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const sharedLeads = await readLeads(accessCode.trim());
+      window.sessionStorage.setItem(
+        "socialdaa-dashboard-key",
+        accessCode.trim(),
+      );
+      setLeads(sharedLeads);
+      setAccessKey(accessCode.trim());
+      setAuthenticated(true);
+      setAccessCode("");
+    } catch (loginError) {
+      setError(loginError.message || "Could not connect to shared lead storage.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function logOut() {
+    window.sessionStorage.removeItem("socialdaa-dashboard-key");
+    setAccessKey("");
+    setAuthenticated(false);
+    setLeads([]);
+  }
 
   const visibleLeads = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -88,12 +127,12 @@ export default function LeadsDashboard() {
     (lead) => lead.status === "Qualified",
   ).length;
 
-  function changeStatus(id, status) {
+  async function changeStatus(id, status) {
     try {
-      setLeads(updateLeadStatus(id, status));
+      setLeads(await updateLeadStatus(id, status, accessKey));
       setError("");
-    } catch {
-      setError("We couldn't update this lead. Please try again.");
+    } catch (statusError) {
+      setError(statusError.message || "We couldn't update this lead.");
     }
   }
 
@@ -142,6 +181,42 @@ export default function LeadsDashboard() {
     URL.revokeObjectURL(url);
   }
 
+  if (!authenticated) {
+    return (
+      <main className="dashboard-login-page">
+        <form className="dashboard-login-card" onSubmit={submitAccessCode}>
+          <Link to="/" className="dashboard-logo" aria-label="Socialdaa home">
+            SOCIAL<i>DAA</i>
+          </Link>
+          <p className="dashboard-eyebrow">SOCIALDAA · LEAD MANAGEMENT</p>
+          <h1>Lead dashboard</h1>
+          <p>Enter your dashboard access code to view shared applications.</p>
+          <label htmlFor="dashboard-access-code">Dashboard access code</label>
+          <input
+            id="dashboard-access-code"
+            type="password"
+            autoComplete="current-password"
+            value={accessCode}
+            onChange={(event) => setAccessCode(event.target.value)}
+            required
+          />
+          {error && (
+            <p className="dashboard-error" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            type="submit"
+            className="dashboard-login-button"
+            disabled={isLoading}
+          >
+            {isLoading ? "Connecting..." : "Open dashboard"}
+          </button>
+        </form>
+      </main>
+    );
+  }
+
   return (
     <div className="leads-dashboard">
       <aside className="dashboard-sidebar">
@@ -175,6 +250,13 @@ export default function LeadsDashboard() {
           <Link to="/" className="dashboard-website-link">
             Visit website <span aria-hidden="true">↗</span>
           </Link>
+          <button
+            type="button"
+            className="dashboard-logout-button"
+            onClick={logOut}
+          >
+            Log out
+          </button>
         </header>
 
         <div className="dashboard-content">
