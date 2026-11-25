@@ -12,7 +12,7 @@ submissions and the dashboard to the shared Google Sheet.
 5. Set **Execute as** to your account, and **Who has access** to **Anyone**. The script checks the private secret before returning or changing leads.
 6. Deploy, authorize spreadsheet access, and copy the web app `/exec` URL.
 
-The script creates a `Leads` tab in the linked spreadsheet. Existing tabs are left untouched.
+The script uses the `LP Lead sheet PB` tab in the linked spreadsheet, creating it if needed. Other tabs are left untouched.
 When updating the script later, use **Deploy → Manage deployments → Edit → New version → Deploy**. If you create a new deployment instead, update `GOOGLE_APPS_SCRIPT_URL` in Vercel to the new URL.
 
 ## 2. Configure Vercel

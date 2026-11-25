@@ -1,5 +1,5 @@
 const SHEET_ID = "1J1nVzjd-c_cDwALb03Zx0Pis1U5Czzi6LtuJqthr6hM";
-const LEADS_SHEET_NAME = "Leads";
+const LEADS_SHEET_NAME = "LP Lead sheet PB";
 const HEADERS = [
   "ID",
   "Name",
@@ -49,6 +49,10 @@ function doPost(event) {
 
   if (payload.action === "updateStatus") {
     return updateLeadStatus(payload.id, payload.status);
+  }
+
+  if (payload.action === "delete") {
+    return deleteLead(payload.id);
   }
 
   if (payload.action === "importLocal") {
@@ -202,6 +206,38 @@ function updateLeadStatus(id, status) {
 
   sheet.getRange(rowIndex + 2, 12).setValue(status);
   return jsonOutput({ leads: getLeads() });
+}
+
+function deleteLead(id) {
+  if (!id) {
+    return jsonOutput({ error: "Lead ID is required." });
+  }
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+
+  try {
+    const sheet = getLeadsSheet();
+    const lastRow = sheet.getLastRow();
+
+    if (lastRow < 2) {
+      return jsonOutput({ error: "Lead could not be found." });
+    }
+
+    const ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
+    const rowIndex = ids.findIndex(function (row) {
+      return String(row[0]) === id;
+    });
+
+    if (rowIndex === -1) {
+      return jsonOutput({ error: "Lead could not be found." });
+    }
+
+    sheet.deleteRow(rowIndex + 2);
+    return jsonOutput({ leads: getLeads() });
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function importLocalLeads(leads) {

@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  deleteLead,
   migrateLocalLeads,
   readLeads,
   updateLeadStatus,
@@ -35,6 +36,7 @@ export default function LeadsDashboard() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All leads");
   const [expandedLeadId, setExpandedLeadId] = useState(null);
+  const [deletingLeadId, setDeletingLeadId] = useState(null);
 
   useEffect(() => {
     if (!accessKey) return undefined;
@@ -135,6 +137,24 @@ export default function LeadsDashboard() {
       setError("");
     } catch (statusError) {
       setError(statusError.message || "We couldn't update this lead.");
+    }
+  }
+
+  async function removeLead(lead) {
+    const confirmed = window.confirm(
+      `Permanently delete the application from ${lead.name}?`,
+    );
+    if (!confirmed) return;
+
+    setDeletingLeadId(lead.id);
+    try {
+      setLeads(await deleteLead(lead.id, accessKey));
+      setExpandedLeadId((current) => (current === lead.id ? null : current));
+      setError("");
+    } catch (deleteError) {
+      setError(deleteError.message || "We couldn't delete this lead.");
+    } finally {
+      setDeletingLeadId(null);
     }
   }
 
@@ -373,6 +393,7 @@ export default function LeadsDashboard() {
                       <th scope="col">Profession</th>
                       <th scope="col">Status</th>
                       <th scope="col">Submitted</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -450,11 +471,24 @@ export default function LeadsDashboard() {
                             <td className="dashboard-date">
                               {formatDate(lead.createdAt)}
                             </td>
+                            <td>
+                              <button
+                                type="button"
+                                className="dashboard-delete-button"
+                                onClick={() => removeLead(lead)}
+                                disabled={deletingLeadId === lead.id}
+                                aria-label={`Delete application from ${lead.name}`}
+                              >
+                                {deletingLeadId === lead.id
+                                  ? "Deleting..."
+                                  : "Delete"}
+                              </button>
+                            </td>
                           </tr>
                           {detailsOpen && (
                             <tr className="dashboard-details-row">
                               <td
-                                colSpan={5}
+                                colSpan={6}
                                 id={`lead-details-${lead.id}`}
                               >
                                 <dl className="dashboard-details-grid">

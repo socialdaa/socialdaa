@@ -644,6 +644,26 @@
   color: #f4f2f8;
 }
 
+.dashboard-delete-button {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 115, 115, 0.3);
+  border-radius: 6px;
+  background: rgba(255, 90, 90, 0.08);
+  color: #ffaaaa;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.dashboard-delete-button:hover:not(:disabled) {
+  border-color: rgba(255, 115, 115, 0.65);
+  background: rgba(255, 90, 90, 0.16);
+}
+
+.dashboard-delete-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 .dashboard-date {
   color: #9895a0 !important;
   font-size: 10px !important;
@@ -708,6 +728,7 @@
 .dashboard-website-link:focus-visible,
 .dashboard-logout-button:focus-visible,
 .dashboard-login-button:focus-visible,
+.dashboard-delete-button:focus-visible,
 .dashboard-empty-link:focus-visible {
   outline: 2px solid var(--dashboard-gold);
   outline-offset: 3px;
@@ -844,7 +865,7 @@
   }
 
   .dashboard-table {
-    min-width: 680px;
+    min-width: 760px;
   }
 
   .dashboard-table .dashboard-details-row td {

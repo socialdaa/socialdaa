@@ -30,8 +30,8 @@ export default async function handler(request, response) {
     );
   }
 
-  if (!["GET", "POST", "PATCH"].includes(request.method)) {
-    response.setHeader("Allow", "GET, POST, PATCH");
+  if (!["GET", "POST", "PATCH", "DELETE"].includes(request.method)) {
+    response.setHeader("Allow", "GET, POST, PATCH, DELETE");
     return sendError(response, 405, "Method not allowed.");
   }
 
@@ -83,6 +83,15 @@ export default async function handler(request, response) {
         !["updateStatus", "importLocal"].includes(action))
     ) {
       return sendError(response, 400, "Lead status update is invalid.");
+    }
+
+    if (
+      request.method === "DELETE" &&
+      (action !== "delete" ||
+        typeof payload.id !== "string" ||
+        !payload.id.trim())
+    ) {
+      return sendError(response, 400, "Lead deletion request is invalid.");
     }
   }
 

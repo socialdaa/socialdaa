@@ -28,7 +28,10 @@ async function requestLeads({ method = "GET", accessKey, body } = {}) {
     throw new Error("Shared lead storage did not confirm the submission.");
   }
 
-  if ((method === "GET" || method === "PATCH") && !Array.isArray(result.leads)) {
+  if (
+    (method === "GET" || method === "PATCH" || method === "DELETE") &&
+    !Array.isArray(result.leads)
+  ) {
     throw new Error("Lead service returned invalid data.");
   }
 
@@ -58,6 +61,16 @@ export async function updateLeadStatus(id, status, accessKey) {
     method: "PATCH",
     accessKey,
     body: { action: "updateStatus", id, status },
+  });
+
+  return result.leads;
+}
+
+export async function deleteLead(id, accessKey) {
+  const result = await requestLeads({
+    method: "DELETE",
+    accessKey,
+    body: { action: "delete", id },
   });
 
   return result.leads;
