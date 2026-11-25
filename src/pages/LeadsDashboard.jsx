@@ -27,7 +27,7 @@ export default function LeadsDashboard() {
   );
   const [accessCode, setAccessCode] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(Boolean(accessKey));
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All leads");
@@ -60,7 +60,6 @@ export default function LeadsDashboard() {
       }
     };
 
-    setIsLoading(true);
     refreshLeads().finally(() => {
       if (active) setIsLoading(false);
     });
