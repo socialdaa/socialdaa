@@ -5,11 +5,15 @@ export function Header({ onApply }) {
     <header className="hero">
       <div className="hero-visual">
         <div className="hero-showreel">
-          <span className="showreel-label">Socialdaa showreel</span>
-          <span className="showreel-play">▶</span>
-          <span className="showreel-caption">
-            Strategy · Script · Shoot · Edit
-          </span>
+          <video
+            src="https://ik.imagekit.io/1chlmqpwh/SWATHI%20GYNEC%20MAM%20200K%20VIDEO_3.mp4"
+            muted
+            autoPlay
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Socialdaa showreel"
+          />
         </div>
         <div className="hero-glow" />
       </div>
