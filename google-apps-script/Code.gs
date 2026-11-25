@@ -54,9 +54,8 @@ function doPost(event) {
 }
 
 function isAuthorized(secret) {
-  const expectedSecret = PropertiesService.getScriptProperties().getProperty(
-    "API_SECRET",
-  );
+  const expectedSecret =
+    PropertiesService.getScriptProperties().getProperty("API_SECRET");
   return Boolean(expectedSecret && secret && secret === expectedSecret);
 }
 
@@ -84,9 +83,7 @@ function getLeads() {
     return [];
   }
 
-  const rows = sheet
-    .getRange(2, 1, lastRow - 1, HEADERS.length)
-    .getValues();
+  const rows = sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues();
 
   return rows
     .filter(function (row) {
@@ -211,9 +208,12 @@ function importLocalLeads(leads) {
     const existingIds =
       lastRow < 2
         ? []
-        : sheet.getRange(2, 1, lastRow - 1, 1).getValues().map(function (row) {
-            return String(row[0]);
-          });
+        : sheet
+            .getRange(2, 1, lastRow - 1, 1)
+            .getValues()
+            .map(function (row) {
+              return String(row[0]);
+            });
     const seenIds = new Set(existingIds);
     const newRows = [];
 
