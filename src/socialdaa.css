@@ -1451,7 +1451,9 @@ footer a {
   }
   .hero-visual {
     width: 100%;
-    height: 43%;
+    top: 120px;
+    bottom: auto;
+    height: 33%;
     min-height: 300px;
   }
   .hero-glow {
