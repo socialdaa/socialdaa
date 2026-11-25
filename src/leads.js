@@ -1,4 +1,5 @@
 const LEADS_STORAGE_KEY = "socialdaa-leads";
+export const LEADS_CHANGED_EVENT = "socialdaa-leads-changed";
 const LEAD_STATUSES = ["New", "Contacted", "Qualified", "Not a fit"];
 
 function isStoredLead(lead) {
@@ -17,13 +18,17 @@ export function readLeads() {
 
   if (!savedLeads) return [];
 
-  const leads = JSON.parse(savedLeads);
+  try {
+    const leads = JSON.parse(savedLeads);
 
-  if (!Array.isArray(leads) || !leads.every(isStoredLead)) {
+    if (!Array.isArray(leads) || !leads.every(isStoredLead)) {
+      throw new Error("Saved lead data is invalid.");
+    }
+
+    return leads;
+  } catch {
     throw new Error("Saved lead data is invalid.");
   }
-
-  return leads;
 }
 
 export function saveLead(application) {
@@ -37,6 +42,9 @@ export function saveLead(application) {
   window.localStorage.setItem(
     LEADS_STORAGE_KEY,
     JSON.stringify([lead, ...readLeads()]),
+  );
+  window.dispatchEvent(
+    new CustomEvent(LEADS_CHANGED_EVENT, { detail: [lead, ...readLeads()] }),
   );
 
   return lead;

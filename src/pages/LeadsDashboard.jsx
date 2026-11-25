@@ -1,6 +1,10 @@
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { readLeads, updateLeadStatus } from "../leads.js";
+import {
+  LEADS_CHANGED_EVENT,
+  readLeads,
+  updateLeadStatus,
+} from "../leads.js";
 import "./LeadsDashboard.css";
 
 const statuses = ["New", "Contacted", "Qualified", "Not a fit"];
@@ -34,6 +38,31 @@ export default function LeadsDashboard() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All leads");
   const [expandedLeadId, setExpandedLeadId] = useState(null);
+
+  useEffect(() => {
+    const refreshLeads = () => {
+      try {
+        setLeads(readLeads());
+        setError("");
+      } catch {
+        setError("Saved leads couldn't be loaded. Check this browser's local storage.");
+      }
+    };
+
+    const handleStorage = (event) => {
+      if (event.key === "socialdaa-leads") refreshLeads();
+    };
+
+    window.addEventListener("storage", handleStorage);
+    window.addEventListener(LEADS_CHANGED_EVENT, refreshLeads);
+    window.addEventListener("focus", refreshLeads);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener(LEADS_CHANGED_EVENT, refreshLeads);
+      window.removeEventListener("focus", refreshLeads);
+    };
+  }, []);
 
   const visibleLeads = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
