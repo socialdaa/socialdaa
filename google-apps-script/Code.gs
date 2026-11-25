@@ -18,11 +18,16 @@ const HEADERS = [
 const STATUSES = ["New", "Contacted", "Qualified", "Not a fit"];
 
 function doGet(event) {
-  if (!isAuthorized(event.parameter.secret)) {
-    return jsonOutput({ error: "Unauthorized." });
-  }
+  try {
+    if (!isAuthorized(event.parameter.secret)) {
+      return jsonOutput({ error: "Unauthorized." });
+    }
 
-  return jsonOutput({ leads: getLeads() });
+    return jsonOutput({ leads: getLeads() });
+  } catch (error) {
+    console.error("Could not read leads from the spreadsheet.", error);
+    return jsonOutput({ error: "Could not read leads from the spreadsheet." });
+  }
 }
 
 function doPost(event) {
@@ -103,10 +108,15 @@ function getLeads() {
         revenue: String(row[9]),
         budget: String(row[10]),
         status: String(row[11]),
-        createdAt: new Date(row[12]).toISOString(),
+        createdAt: toIsoString(row[12]),
       };
     })
     .reverse();
+}
+
+function toIsoString(value) {
+  const date = value instanceof Date ? value : new Date(value);
+  return isNaN(date.getTime()) ? "" : date.toISOString();
 }
 
 function createLead(application) {

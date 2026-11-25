@@ -13,6 +13,7 @@ submissions and the dashboard to the shared Google Sheet.
 6. Deploy, authorize spreadsheet access, and copy the web app `/exec` URL.
 
 The script creates a `Leads` tab in the linked spreadsheet. Existing tabs are left untouched.
+When updating the script later, use **Deploy → Manage deployments → Edit → New version → Deploy**. If you create a new deployment instead, update `GOOGLE_APPS_SCRIPT_URL` in Vercel to the new URL.
 
 ## 2. Configure Vercel
 

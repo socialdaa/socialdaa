@@ -106,7 +106,21 @@ export default async function handler(request, response) {
           }),
     });
 
-    const result = await upstream.json();
+    const responseText = await upstream.text();
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch {
+      console.error("Google Apps Script returned a non-JSON response.", {
+        status: upstream.status,
+        contentType: upstream.headers.get("content-type"),
+      });
+      return sendError(
+        response,
+        502,
+        "Google Apps Script returned an unexpected response. Check its web app deployment and execution logs.",
+      );
+    }
 
     if (!upstream.ok || result.error) {
       console.error("Google Sheets lead service returned an error.", {
@@ -130,7 +144,7 @@ export default async function handler(request, response) {
     return sendError(
       response,
       502,
-      "Could not reach shared lead storage. Please try again.",
+      "Could not connect to Google Apps Script. Check its URL and deployment access, then try again.",
     );
   }
 }
