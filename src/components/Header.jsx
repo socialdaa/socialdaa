@@ -1,11 +1,34 @@
 // import heroImage from "../assets/hero.png";
+import { useRef, useState } from "react";
 
 export function Header({ onApply }) {
+  const heroVideoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleHeroSound = () => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    if (video.muted) {
+      video.muted = false;
+      setIsMuted(false);
+      video.play().catch(() => {
+        video.muted = true;
+        setIsMuted(true);
+      });
+      return;
+    }
+
+    video.muted = true;
+    setIsMuted(true);
+  };
+
   return (
     <header className="hero">
       <div className="hero-visual">
         <div className="hero-showreel">
           <video
+            ref={heroVideoRef}
             src="https://ik.imagekit.io/1chlmqpwh/SWATHI%20GYNEC%20MAM%20200K%20VIDEO_3.mp4"
             muted
             autoPlay
@@ -14,6 +37,15 @@ export function Header({ onApply }) {
             preload="metadata"
             aria-label="Socialdaa showreel"
           />
+          <button
+            className="hero-sound-button"
+            type="button"
+            aria-label={isMuted ? "Unmute hero video" : "Mute hero video"}
+            aria-pressed={!isMuted}
+            onClick={toggleHeroSound}
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </button>
         </div>
         <div className="hero-glow" />
       </div>
