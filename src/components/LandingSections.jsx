@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import teamImage from "../assets/team.jpg";
-import drMokanalakshmiImage from "../assets/dr.mokanalakshmi_derm.jpg";
 import glowRoshImage from "../assets/glow_rosh.jpg";
 import coachRakaniyaImage from "../assets/coach_rakaniya.jpg";
+import drMokanalakshmiImage from "../assets/dr.mokanalakshmi_derm.jpg";
 import drHananImage from "../assets/dr_hanan_derm.jpg";
 import arunAnnaduraiImage from "../assets/arunannadurai.jpg";
 import madhuKumareshImage from "../assets/madhu_kumaresh.jpg";
@@ -30,8 +30,6 @@ export function UrgencySection() {
       posts: "87 posts",
       followers: "150K followers",
       following: "1 following",
-      before: "0",
-      after: "100K",
       growth: "100K",
       timeline: "1 month",
       initials: "GR",
@@ -44,8 +42,6 @@ export function UrgencySection() {
       posts: "225 posts",
       followers: "107K followers",
       following: "151 following",
-      before: "0",
-      after: "100K",
       growth: "100K",
       timeline: "3 months",
       initials: "CR",
@@ -58,8 +54,6 @@ export function UrgencySection() {
       posts: "397 posts",
       followers: "1M followers",
       following: "8 following",
-      before: "0",
-      after: "100K",
       growth: "100K",
       timeline: "13 reels",
       initials: "DM",
@@ -72,8 +66,6 @@ export function UrgencySection() {
       posts: "460 posts",
       followers: "412K followers",
       following: "639 following",
-      before: "0",
-      after: "100K",
       growth: "100K",
       timeline: "2 months",
       initials: "DH",
@@ -86,8 +78,6 @@ export function UrgencySection() {
       posts: "190 posts",
       followers: "161K followers",
       following: "1,903 following",
-      before: "42K",
-      after: "100K",
       growth: "58K",
       timeline: "6 months",
       initials: "AA",
@@ -100,8 +90,6 @@ export function UrgencySection() {
       posts: "132 posts",
       followers: "181K followers",
       following: "1 following",
-      before: "0",
-      after: "100K",
       growth: "100K",
       timeline: "3 months",
       initials: "MK",
@@ -114,8 +102,6 @@ export function UrgencySection() {
       posts: "78 posts",
       followers: "135K followers",
       following: "0 following",
-      before: "0",
-      after: "135K",
       growth: "135K",
       timeline: "3 months",
       initials: "DC",
@@ -127,8 +113,6 @@ export function UrgencySection() {
       posts: "88 posts",
       followers: "95.8K followers",
       following: "2 following",
-      before: "0",
-      after: "95.8K",
       growth: "95.8K",
       timeline: "1.5 months",
       timelineIsIllustrative: true,
@@ -141,8 +125,6 @@ export function UrgencySection() {
       posts: "229 posts",
       followers: "168K followers",
       following: "0 following",
-      before: "0",
-      after: "168K",
       growth: "168K",
       timeline: "100K in 17 reels",
       timelineIsIllustrative: true,
@@ -155,8 +137,6 @@ export function UrgencySection() {
       posts: "126 posts",
       followers: "56.6K followers",
       following: "8 following",
-      before: "0",
-      after: "56.6K",
       growth: "56.6K",
       timeline: "1 month",
       timelineIsIllustrative: true,
@@ -169,8 +149,6 @@ export function UrgencySection() {
       posts: "71 posts",
       followers: "54.3K followers",
       following: "4 following",
-      before: "0",
-      after: "54.3K",
       growth: "54.3K",
       timeline: "2 months",
       timelineIsIllustrative: true,
@@ -183,8 +161,6 @@ export function UrgencySection() {
       posts: "119 posts",
       followers: "152K followers",
       following: "3 following",
-      before: "0",
-      after: "152K",
       growth: "152K",
       timeline: "6 months",
       initials: "NS",
@@ -196,8 +172,6 @@ export function UrgencySection() {
       posts: "16 posts",
       followers: "13.1K followers",
       following: "2 following",
-      before: "0",
-      after: "13.1K",
       growth: "13.1K",
       timeline: "1 Month",
       timelineIsIllustrative: true,
@@ -210,8 +184,6 @@ export function UrgencySection() {
       posts: "5,119 posts",
       followers: "153K followers",
       following: "7 following",
-      before: "0",
-      after: "153K",
       growth: "153K",
       timeline: "100K in 30 reels",
       timelineIsIllustrative: true,
@@ -224,8 +196,6 @@ export function UrgencySection() {
       posts: "932 posts",
       followers: "120K followers",
       following: "1,636 following",
-      before: "0",
-      after: "120K",
       growth: "120K",
       timeline: "3 months",
       timelineIsIllustrative: true,
@@ -238,8 +208,6 @@ export function UrgencySection() {
       posts: "77 posts",
       followers: "46.8K followers",
       following: "1 following",
-      before: "0",
-      after: "46.8K",
       growth: "46.8K",
       timeline: "1.5 months",
       timelineIsIllustrative: true,
@@ -252,8 +220,6 @@ export function UrgencySection() {
       posts: "47 posts",
       followers: "40K followers",
       following: "1 following",
-      before: "0",
-      after: "40K",
       growth: "40K",
       timeline: "1 month",
       timelineIsIllustrative: true,
@@ -266,8 +232,6 @@ export function UrgencySection() {
       posts: "204 posts",
       followers: "159K followers",
       following: "0 following",
-      before: "0",
-      after: "159K",
       growth: "159K",
       timeline: "150 videos",
       initials: "DL",
@@ -279,8 +243,6 @@ export function UrgencySection() {
       posts: "1,278 posts",
       followers: "153K followers",
       following: "1,848 following",
-      before: "0",
-      after: "153K",
       growth: "153K",
       timeline: "100K in 25 reels",
       timelineIsIllustrative: true,
@@ -293,8 +255,6 @@ export function UrgencySection() {
       posts: "2,680 posts",
       followers: "210K followers",
       following: "113 following",
-      before: "0",
-      after: "210K",
       growth: "210K",
       timeline: "6 months",
       timelineIsIllustrative: true,
@@ -307,8 +267,6 @@ export function UrgencySection() {
       posts: "199 posts",
       followers: "64K followers",
       following: "0 following",
-      before: "0",
-      after: "64K",
       growth: "64K",
       timeline: "2 months",
       timelineIsIllustrative: true,
@@ -321,8 +279,6 @@ export function UrgencySection() {
       posts: "206 posts",
       followers: "206K followers",
       following: "2 following",
-      before: "0",
-      after: "206K",
       growth: "206K",
       timeline: "5 months",
       initials: "DN",
@@ -335,8 +291,6 @@ export function UrgencySection() {
       posts: "17 posts",
       followers: "48.7K followers",
       following: "18 following",
-      before: "0",
-      after: "48.7K",
       growth: "48.7K",
       timeline: "1 month",
       timelineIsIllustrative: true,
@@ -349,8 +303,6 @@ export function UrgencySection() {
       posts: "606 posts",
       followers: "620K followers",
       following: "443 following",
-      before: "0",
-      after: "620K",
       growth: "620K",
       timeline: "6 months",
       timelineIsIllustrative: true,
@@ -363,8 +315,6 @@ export function UrgencySection() {
       posts: "29 reels",
       followers: "202K followers",
       following: "Growing organically",
-      before: "31K",
-      after: "202K",
       growth: "171K",
       timeline: "29 reels",
       initials: "AV",
@@ -376,16 +326,13 @@ export function UrgencySection() {
       posts: "Growth case",
       followers: "100K followers",
       following: "Organic growth",
-      before: "0",
-      after: "100K",
       growth: "100K",
       timeline: "100K in 17 videos",
       timelineIsIllustrative: true,
       initials: "TK",
     },
   ];
-
-  const [growthIndex, setGrowthIndex] = useState(0);
+  const [growthIndex, setGrowthIndex] = useState(19);
   const [isGrowthHovered, setIsGrowthHovered] = useState(false);
   const [isGrowthFocused, setIsGrowthFocused] = useState(false);
 
@@ -417,12 +364,73 @@ export function UrgencySection() {
     <section className="urgency-section">
       <div className="wrap">
         <div className="urgency-grid">
-          <div>
-            <div className="eyebrow">Your market is not waiting</div>
-            <h2>
-              Your competitors are becoming familiar.{" "}
-              <span className="highlight">Are you?</span>
-            </h2>
+          <div
+            className="visibility-graph"
+            role="img"
+            aria-label="Qualitative comparison of personal visibility: Sadayandi Ramesh of Pothys has high personal visibility, represented by Founder Visibility, Public Presence, and Personal Brand. K. P. Ramasamy of KPR Group has comparatively lower media visibility, represented by Business Reputation, Industry Presence, and Limited Founder-led Content. The bars are qualitative, not numerical metrics."
+          >
+            <div className="visibility-graph-heading">
+              <h2>
+                Two Successful Business Leaders. Different Levels of Personal
+                Visibility.
+              </h2>
+              <p>
+                Your business may already have credibility. But how visible are
+                you as the person behind it?
+              </p>
+            </div>
+
+            <div className="visibility-plot">
+              <div className="visibility-bars" aria-hidden="true">
+                <div className="visibility-bar-column visibility-bar-column--high">
+                  <span className="visibility-level">
+                    HIGH PERSONAL VISIBILITY
+                  </span>
+                  <div className="visibility-bar-track visibility-bar-track--high">
+                    <span className="visibility-bar-fill visibility-bar-fill--high" />
+                    <img
+                      className="visibility-bar-avatar"
+                      src="/pothys.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div className="visibility-bar-column visibility-bar-column--low">
+                  <span className="visibility-level">
+                    LOWER MEDIA VISIBILITY
+                  </span>
+                  <div className="visibility-bar-track visibility-bar-track--low">
+                    <span className="visibility-bar-fill visibility-bar-fill--low" />
+                    <img
+                      className="visibility-bar-avatar"
+                      src="/ram.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="visibility-bar-labels" aria-hidden="true">
+              <div>
+                <strong>Sadayandi Ramesh</strong>
+                <span>Pothys</span>
+                <ul className="visibility-descriptors">
+                  <li>Founder Visibility</li>
+                  <li>Public Presence</li>
+                  <li>Personal Brand</li>
+                </ul>
+              </div>
+              <div>
+                <strong>K. P. Ramasamy</strong>
+                <span>KPR Group</span>
+                <ul className="visibility-descriptors">
+                  <li>Business Reputation</li>
+                  <li>Industry Presence</li>
+                  <li>Limited Founder-led Content</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div
@@ -456,12 +464,6 @@ export function UrgencySection() {
                   </small>
                 </div>
               </div>
-
-              {/* <div className="growth-pills">
-                <span>♙ {item.niche}</span>
-                <span>🔥 {item.views}</span>
-                <span>⚡ {item.reel}</span>
-              </div> */}
 
               <div className="growth-result">
                 <div className="growth-result-heading">
