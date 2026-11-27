@@ -52,13 +52,13 @@ export function Header({ onApply }) {
 
       <div className="top">
         <a className="logo" href="#top">
-          SOCIAL<i>DAA</i>
+          <img src="/logo.png" alt="Socialdaa" />
         </a>
       </div>
 
       <div className="hero-content">
         <div className="hero-eyebrow">
-          Attention: founders, CXOs &amp; experts
+          Founders, CXOs, Professionals &amp; Industry Experts — This Is for You
         </div>
         <h1>
           We Turn Founders Into <span className="highlight">Authorities.</span>
@@ -73,10 +73,10 @@ export function Header({ onApply }) {
         <button className="btn btn-wide" onClick={onApply}>
           Build My Personal Brand
         </button>
-        <p className="note">Application-based · Limited monthly onboarding</p>
+        <p className="note">Selective Partnerships · Limited Monthly Slots</p>
       </div>
 
-      <div className="hero-proof" aria-label="Socialdaa service proof">
+      {/* <div className="hero-proof" aria-label="Socialdaa service proof">
         <div>
           <strong>Strategic</strong>
           <small>Personal positioning</small>
@@ -89,7 +89,7 @@ export function Header({ onApply }) {
           <strong>Built for trust</strong>
           <small>Not vanity content</small>
         </div>
-      </div>
+      </div> */}
     </header>
   );
 }

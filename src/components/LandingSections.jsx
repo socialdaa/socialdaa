@@ -191,7 +191,7 @@ export function UrgencySection() {
     },
     {
       name: "karupatti_murali",
-      role: "Murali Tharsan",
+      role: "Murali Thangam",
       experience: "Founder · Karupatti Coffee Brand",
       posts: "16 posts",
       followers: "13.1K followers",
@@ -199,7 +199,7 @@ export function UrgencySection() {
       before: "0",
       after: "13.1K",
       growth: "13.1K",
-      timeline: "1 month",
+      timeline: "1 Month",
       timelineIsIllustrative: true,
       initials: "KM",
     },
@@ -463,30 +463,62 @@ export function UrgencySection() {
                 <span>⚡ {item.reel}</span>
               </div> */}
 
-              <div className="growth-stats">
-                <div>
-                  <small>BEFORE</small>
-                  <strong>{item.before}</strong>
-                  <span>
-                    {item.before === "0"
-                      ? "Started from scratch"
-                      : "Before Socialdaa"}
-                  </span>
-                </div>
-                <div>
-                  <small>AFTER</small>
-                  <strong className="growth-pink">↗ {item.after}</strong>
-                  <span>followers</span>
-                </div>
-                <div>
+              <div className="growth-result">
+                <div className="growth-result-heading">
+                  <span aria-hidden="true" />
                   <small>GROWTH</small>
-                  <strong className="growth-pink">{item.growth}</strong>
-                  <span>in growth period</span>
+                  <span aria-hidden="true" />
                 </div>
-                <div>
-                  <small>TIMELINE</small>
-                  <strong className="growth-timeline">{item.timeline}</strong>
-                  <span className="growth-pink">RESULT</span>
+
+                <div className="growth-result-main">
+                  <svg
+                    className="growth-trend-icon"
+                    viewBox="0 0 130 112"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M8 96 44 59 67 78 115 28M88 28l27-6-3 27"
+                      stroke="currentColor"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <div className="growth-result-copy">
+                    <strong>{item.growth}</strong>
+                    <span>Followers Gained</span>
+                  </div>
+                </div>
+
+                <div className="growth-timeline-pill">
+                  <svg
+                    className="growth-calendar-icon"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="7"
+                      y="11"
+                      width="34"
+                      height="30"
+                      rx="3"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      d="M15 6v10M33 6v10M8 20h32M16 27h3M24 27h3M32 27h3M16 34h3M24 34h3"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="growth-timeline-divider" aria-hidden="true" />
+                  <span className="growth-timeline-copy">
+                    <small>TIMELINE</small>
+                    <strong>{item.timeline}</strong>
+                  </span>
                 </div>
               </div>
 
@@ -1219,7 +1251,7 @@ export function Footer() {
         <div className="footer-row">
           <a href="mailto:hello@socialdaa.com">hello@socialdaa.com</a>
           <a className="logo" href="#top">
-            SOCIAL<i>DAA</i>
+            <img src="/logo.png" alt="Socialdaa" />
           </a>
           <a href="#">Terms &amp; Conditions</a>
         </div>

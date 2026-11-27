@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 import { Header } from "./components/Header.jsx";
 import ApplicationOverlay from "./components/ApplicationOverlay.jsx";
-import FloatingCta from "./components/FloatingCta.jsx";
+// import FloatingCta from "./components/FloatingCta.jsx";
 
 import {
   // StatementSection,
@@ -14,7 +14,7 @@ import {
   WorkSection,
   // FounderSection,
   // BenefitsSection,
-  TestimonialsSection,
+  // TestimonialsSection,
   // ObjectionsSection,
   FinalCta,
   Footer,
@@ -46,11 +46,11 @@ function MetaPixelRouteViews() {
 
 function Home() {
   const [applicationOpen, setApplicationOpen] = useState(false);
-  const [floatingVisible, setFloatingVisible] = useState(false);
 
-  useEffect(() => {
-    setFloatingVisible(true);
-  }, []);
+  // const [floatingVisible, setFloatingVisible] = useState(false);
+  // useEffect(() => {
+  //   setFloatingVisible(true);
+  // }, []);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -64,7 +64,7 @@ function Home() {
   const openApplication = () => setApplicationOpen(true);
 
   return (
-    <div id="top">
+    <div id="top" className="landing-page">
       <Header onApply={openApplication} />
       <WorkSection onApply={openApplication} />
       <AudienceSection />
@@ -74,7 +74,7 @@ function Home() {
       <FaqSection />
 
       {/* <BenefitsSection /> */}
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       {/* <ObjectionsSection /> */}
 
       {/* 
@@ -94,10 +94,10 @@ function Home() {
       <FinalCta onApply={openApplication} />
       <Footer />
 
-      <FloatingCta
+      {/* <FloatingCta
         visible={floatingVisible && !applicationOpen}
         onApply={openApplication}
-      />
+      /> */}
 
       <ApplicationOverlay
         open={applicationOpen}
