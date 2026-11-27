@@ -436,7 +436,7 @@ export function UrgencySection() {
               }
             }}
           >
-            <div className="growth-case-heading">Our works</div>
+            <div className="growth-case-heading">Our Results</div>
             <article className="growth-case" key={item.name}>
               <div className="growth-profile">
                 <div className="growth-profile-avatar">
@@ -514,7 +514,10 @@ export function UrgencySection() {
                       strokeLinecap="round"
                     />
                   </svg>
-                  <span className="growth-timeline-divider" aria-hidden="true" />
+                  <span
+                    className="growth-timeline-divider"
+                    aria-hidden="true"
+                  />
                   <span className="growth-timeline-copy">
                     <small>TIMELINE</small>
                     <strong>{item.timeline}</strong>
@@ -830,23 +833,23 @@ export function WorkSection({ onApply }) {
     if (!video) return;
 
     if (video.paused) {
-      reelsRef.current?.querySelectorAll(".reel video").forEach((otherVideo) => {
-        if (otherVideo !== video) {
-          otherVideo.pause();
-          otherVideo.muted = true;
-        }
-      });
-      video.muted = false;
-      setSoundIndex(index);
-      video
-        .play()
-        .catch((error) => {
-          video.muted = true;
-          setSoundIndex((current) => (current === index ? -1 : current));
-          if (error.name !== "AbortError") {
-            console.error("Could not play testimonial video with sound.", error);
+      reelsRef.current
+        ?.querySelectorAll(".reel video")
+        .forEach((otherVideo) => {
+          if (otherVideo !== video) {
+            otherVideo.pause();
+            otherVideo.muted = true;
           }
         });
+      video.muted = false;
+      setSoundIndex(index);
+      video.play().catch((error) => {
+        video.muted = true;
+        setSoundIndex((current) => (current === index ? -1 : current));
+        if (error.name !== "AbortError") {
+          console.error("Could not play testimonial video with sound.", error);
+        }
+      });
     } else {
       video.pause();
       video.muted = true;
