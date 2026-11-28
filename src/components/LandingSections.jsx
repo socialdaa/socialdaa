@@ -601,17 +601,21 @@ export function ProcessSection() {
               </div>
             </div>
             <p>
-              Like How Thalaivar says “Enga Valzhi thami vazhi” - we do it in
-              our own unique way. Create end-to-end content for your Instagram.
-              We create reels, carousels, memes and daily stories for your page,
-              grow your Instagram organically and build a community of followers
-              that converts into paid customers.
+              From strategic Reels and thought-provoking carousels to
+              storytelling, personal insights and daily Stories, we craft your
+              content end-to-end to position you as an authority in your
+              industry. We help founders, professionals, experts and
+              entrepreneurs build visibility, credibility and a strong digital
+              presence that attracts the right audience and creates meaningful
+              opportunities.
             </p>
           </div>
 
           <blockquote className="how-quote">
-            Like How Thalaivar says “Enga Valzhi thami vazhi”
-            <span>we do it in our own unique way!</span>
+            Like Thalaivar says, “Enga Vazhi, Thani Vazhi”
+            <span>
+              we help you build a personal brand that stands out, your way.
+            </span>
           </blockquote>
         </div>
       </div>
