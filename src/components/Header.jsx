@@ -12,9 +12,16 @@ export function Header({ onApply }) {
     if (video.muted) {
       video.muted = false;
       setIsMuted(false);
+      if (!video.paused) return;
+
       video.play().catch(() => {
         video.muted = true;
         setIsMuted(true);
+        video.play().catch((error) => {
+          if (error.name !== "NotAllowedError") {
+            console.warn("Could not resume hero video.", error);
+          }
+        });
       });
       return;
     }
@@ -27,26 +34,39 @@ export function Header({ onApply }) {
     const video = heroVideoRef.current;
     if (!video) return;
 
-    const playVideoWithSound = () => {
+    const startVideo = () => {
       video.muted = false;
       setIsMuted(false);
       video.play().catch(() => {
         video.muted = true;
         setIsMuted(true);
+        video.play().catch((error) => {
+          if (error.name !== "NotAllowedError") {
+            console.warn("Could not start hero video.", error);
+          }
+        });
       });
     };
 
-    const handleVisibilityChange = () => {
-      if (!document.hidden) playVideoWithSound();
+    const resumeVideo = () => {
+      if (document.hidden || !video.paused) return;
+
+      video.play().catch((error) => {
+        video.muted = true;
+        setIsMuted(true);
+        video.play().catch((resumeError) => {
+          if (resumeError.name !== "NotAllowedError") {
+            console.warn("Could not resume hero video.", error, resumeError);
+          }
+        });
+      });
     };
 
-    video.addEventListener("canplay", playVideoWithSound);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    playVideoWithSound();
+    document.addEventListener("visibilitychange", resumeVideo);
+    startVideo();
 
     return () => {
-      video.removeEventListener("canplay", playVideoWithSound);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("visibilitychange", resumeVideo);
     };
   }, []);
 
@@ -57,7 +77,6 @@ export function Header({ onApply }) {
           <video
             ref={heroVideoRef}
             src="https://ik.imagekit.io/1chlmqpwh/SWATHI%20GYNEC%20MAM%20200K%20VIDEO_3.mp4"
-            autoPlay
             loop
             playsInline
             preload="auto"
