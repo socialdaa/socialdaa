@@ -1,5 +1,5 @@
 // import heroImage from "../assets/hero.png";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Header({ onApply }) {
   const heroVideoRef = useRef(null);
@@ -23,6 +23,30 @@ export function Header({ onApply }) {
     setIsMuted(true);
   };
 
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const playMutedVideo = () => {
+      video.muted = true;
+      setIsMuted(true);
+      video.play().catch(() => {});
+    };
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden) playMutedVideo();
+    };
+
+    video.addEventListener("canplay", playMutedVideo);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    playMutedVideo();
+
+    return () => {
+      video.removeEventListener("canplay", playMutedVideo);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   return (
     <header className="hero">
       <div className="hero-visual">
@@ -34,7 +58,10 @@ export function Header({ onApply }) {
             autoPlay
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nodownload noplaybackrate"
+            webkit-playsinline="true"
             aria-label="Socialdaa showreel"
           />
           <button
@@ -65,10 +92,12 @@ export function Header({ onApply }) {
         </h1>
         <p className="sub">
           We build personal brands that earn trust, create authority and
-          <br />
-          turn attention into real opportunities.
+          <span className="break-line">
+            {" "}
+            turn attention into real opportunities.
+          </span>
         </p>
-        <p className="tagline">Unga expertise-ku oru strong, trusted face.</p>
+        <p className="tagline">Unga experience-ku oru strong, trusted face.</p>
         <p className="service-line">Strategy · Scripting · Shoot · Editing</p>
         <button className="btn btn-wide" onClick={onApply}>
           Build My Personal Brand

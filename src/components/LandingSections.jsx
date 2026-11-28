@@ -560,7 +560,7 @@ export function UrgencySection() {
 
 export function ProcessSection() {
   const metrics = [
-    ["12M+", "Followers"],
+    ["20M+", "Followers"],
     ["5B+", "Organic Views"],
     // ["12,000+", "Leads"],
     ["25,000+", "Content Delivered"],
@@ -914,7 +914,10 @@ export function WorkSection({ onApply }) {
                   autoPlay
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  disablePictureInPicture
+                  controlsList="nodownload noplaybackrate"
+                  webkit-playsinline="true"
                   aria-label={`${video.name} testimonial video`}
                   onPlay={() =>
                     setPlayingVideos((current) => new Set(current).add(index))
