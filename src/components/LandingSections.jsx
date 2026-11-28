@@ -728,46 +728,85 @@ export function WorkSection({ onApply }) {
     {
       name: "Dr. Abinaya Vijayan",
       role: "100K followers in 29 reels",
-      src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/100k%20Followers%20in%2029%20Reels!%20__%20Real%20OG%20@dr.abinaya_vijayan%20%E2%9D%A4%EF%B8%8F%E2%AD%90%EF%B8%8F%20Sometimes%20the%20universe%20gives%20y.mp4",
+      file: "iphone-compatible/abinaya.mp4",
     },
     {
       name: "Dr. Hanan",
       role: "100K followers in 2 months",
-      src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/Here%20we%20go%20100k%20in%20just%202%20Months%20%E2%9C%A8%E2%9D%A4%EF%B8%8FNext%20Stop%20500k%20_The%20Hardwork%20,%20The%20Late%20Night%20Shoots%20,%20Mana.mp4",
+      file: "iphone-compatible/hanan.mp4",
     },
     {
       name: "Swathi",
-      role: "Architect & Luxury Interior Designer",
-      src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/Swatrhi%20mam%20100k%20remastered.mp4",
+      role: "100K followers · Architect & Luxury Interior Designer",
+      file: "Swatrhi mam 100k remastered.mp4",
     },
-    // {
-    //   name: "DR. Surya",
-    //   role: "Dermatologist",
-    //   src: "https://ik.imagekit.io/ohcrl5hvv/Testimonial%20PB/100K%20isnt%20luck.%20Its%20consistency_Congratulations%20maam%20@dr.suryaderm!%E2%9D%A4%EF%B8%8FHappy%20to%20witness%20this%20j.mp4?updatedAt=1795070949728",
-    // },
     {
       name: "Arun Annadurai",
-      role: "Creator & Entrepreneur",
-      src: "https://ik.imagekit.io/qhgdd0289/New%20Folder/Wholesome%20100k%20_%E2%9D%A4%EF%B8%8F_%20@arunannadurai_official%20Next%20Stop%20500k!%20Poiteeeey%20irukanum.One%20of%20our%20fav%20.mp4",
+      role: "42K to 100K+ · Creator & Entrepreneur",
+      file: "iphone-compatible/arun.mp4",
     },
     {
       name: "Dr. Sakthivel Sivasubramanian",
-      role: "Chief Endocrinologist",
-      src: "https://ik.imagekit.io/qhgdd0289/New%20Folder/100k%20in%2013%20Reels%20_%E2%9D%A4%EF%B8%8FSakthiiii%20sir%20you%20beauty!%20The%20Universe%20gave%20you%20what%20you%20exactly%20wanted.You.mp4",
+      role: "100K in 13 reels · Chief Endocrinologist",
+      file:
+        "100k in 13 Reels 😭❤️Sakthiiii sir you beauty! The Universe gave you what you exactly wanted.You.mp4",
     },
     {
-      name: "Dr. Siva Priya",
-      role: "Aesthetic Doctor",
-      src: "https://ik.imagekit.io/qhgdd0289/New%20Folder/Atlast%20100k%20Family%20%E2%9D%A4%EF%B8%8FWasnt%20a%20easy%20ride%20but%20we%20made%20it%20look%20easy.Your%20Fun%20,%20Energy%20,%20Enthusiasm%20.mp4",
+      name: "Dr. Surya",
+      role: "Dermatologist · 52K to 114K",
+      file: "iphone-compatible/surya.mp4",
     },
   ];
 
-  const [playingVideos, setPlayingVideos] = useState(() => new Set());
-  const [soundIndex, setSoundIndex] = useState(-1);
+  const [mutedVideos, setMutedVideos] = useState(
+    () => new Set(videos.map((_, index) => index)),
+  );
+  const [videoProgress, setVideoProgress] = useState(() =>
+    videos.map(() => ({ currentTime: 0, duration: 0 })),
+  );
   const [failedVideos, setFailedVideos] = useState(() => new Set());
   const [canScrollPrevious, setCanScrollPrevious] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
   const reelsRef = useRef(null);
+  const getVideoSource = (file) =>
+    `/videos/${file.split("/").map(encodeURIComponent).join("/")}`;
+
+  useEffect(() => {
+    const reels = reelsRef.current;
+    if (!reels) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          const index = Number(video.dataset.index);
+
+          if (entry.isIntersecting) {
+            video.play().catch((error) => {
+              if (error.name !== "AbortError") {
+                video.muted = true;
+                setMutedVideos((current) => new Set(current).add(index));
+                console.warn("Could not autoplay work video.", error);
+              }
+            });
+          } else {
+            video.pause();
+            if (!video.muted) {
+              video.muted = true;
+              setMutedVideos((current) => new Set(current).add(index));
+            }
+          }
+        });
+      },
+      { root: reels, threshold: 0.6 },
+    );
+
+    reels.querySelectorAll(".reel video").forEach((video) => {
+      observer.observe(video);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const reels = reelsRef.current;
@@ -789,37 +828,6 @@ export function WorkSection({ onApply }) {
     };
   }, []);
 
-  useEffect(() => {
-    const reels = reelsRef.current;
-    if (!reels) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          const index = Number(video.dataset.index);
-
-          if (entry.isIntersecting) {
-            video.play().catch((error) => {
-              if (error.name !== "AbortError") {
-                console.warn("Could not autoplay testimonial video.", error);
-              }
-            });
-          } else {
-            video.pause();
-            video.muted = true;
-            setSoundIndex((current) => (current === index ? -1 : current));
-          }
-        });
-      },
-      { root: reels, threshold: 0.25 },
-    );
-
-    reels.querySelectorAll("video").forEach((video) => observer.observe(video));
-
-    return () => observer.disconnect();
-  }, []);
-
   const scrollReels = (direction) => {
     const reels = reelsRef.current;
     const firstReel = reels?.querySelector(".reel");
@@ -832,62 +840,48 @@ export function WorkSection({ onApply }) {
     });
   };
 
-  const togglePlayback = (event, index) => {
-    event.stopPropagation();
-    const reel = event.currentTarget.closest(".reel");
-    const video = reel?.querySelector("video");
-    if (!video) return;
-
-    if (video.paused) {
-      reelsRef.current
-        ?.querySelectorAll(".reel video")
-        .forEach((otherVideo) => {
-          if (otherVideo !== video) {
-            otherVideo.pause();
-            otherVideo.muted = true;
-          }
-        });
-      video.muted = false;
-      setSoundIndex(index);
-      video.play().catch((error) => {
-        video.muted = true;
-        setSoundIndex((current) => (current === index ? -1 : current));
-        if (error.name !== "AbortError") {
-          console.error("Could not play testimonial video with sound.", error);
-        }
-      });
-    } else {
-      video.pause();
-      video.muted = true;
-      setSoundIndex((current) => (current === index ? -1 : current));
-    }
-  };
-
-  const toggleSound = (event, index) => {
-    event.stopPropagation();
+  const toggleVideoMute = (index) => {
     const video = reelsRef.current?.querySelectorAll(".reel video")[index];
     if (!video) return;
 
-    if (!video.muted) {
-      video.muted = true;
-      setSoundIndex(-1);
-      return;
-    }
-
-    reelsRef.current?.querySelectorAll(".reel video").forEach((otherVideo) => {
-      otherVideo.muted = otherVideo !== video;
+    video.muted = !video.muted;
+    setMutedVideos((current) => {
+      const next = new Set(current);
+      if (video.muted) next.add(index);
+      else next.delete(index);
+      return next;
     });
-    setSoundIndex(index);
 
     if (video.paused) {
       video.play().catch((error) => {
         video.muted = true;
-        setSoundIndex((current) => (current === index ? -1 : current));
+        setMutedVideos((current) => new Set(current).add(index));
         if (error.name !== "AbortError") {
-          console.error("Could not play testimonial video with sound.", error);
+          console.warn("Could not start work video.", error);
         }
       });
     }
+  };
+
+  const updateVideoProgress = (index, video) => {
+    setVideoProgress((current) =>
+      current.map((progress, currentIndex) =>
+        currentIndex === index
+          ? {
+              currentTime: video.currentTime,
+              duration: Number.isFinite(video.duration) ? video.duration : 0,
+            }
+          : progress,
+      ),
+    );
+  };
+
+  const seekVideo = (index, currentTime) => {
+    const video = reelsRef.current?.querySelectorAll(".reel video")[index];
+    if (!video) return;
+
+    video.currentTime = Number(currentTime);
+    updateVideoProgress(index, video);
   };
 
   return (
@@ -900,78 +894,74 @@ export function WorkSection({ onApply }) {
         <div className="reels-frame">
           <div className="reels" ref={reelsRef}>
             {videos.map((video, index) => (
-              <div
-                className="reel"
-                key={video.src}
-                onClick={(event) => {
-                  if (!failedVideos.has(index)) togglePlayback(event, index);
-                }}
-              >
+              <div className="reel" key={video.file}>
                 <video
-                  src={video.src}
                   data-index={index}
+                  src={getVideoSource(video.file)}
                   muted
-                  autoPlay
                   loop
                   playsInline
-                  preload="auto"
-                  disablePictureInPicture
-                  controlsList="nodownload noplaybackrate"
-                  webkit-playsinline="true"
-                  aria-label={`${video.name} testimonial video`}
-                  onPlay={() =>
-                    setPlayingVideos((current) => new Set(current).add(index))
+                  preload="metadata"
+                  onLoadedMetadata={(event) =>
+                    updateVideoProgress(index, event.currentTarget)
+                  }
+                  onTimeUpdate={(event) =>
+                    updateVideoProgress(index, event.currentTarget)
                   }
                   onError={(event) => {
-                    setFailedVideos((current) => new Set(current).add(index));
+                    const failedIndex = Number(
+                      event.currentTarget.dataset.index,
+                    );
+                    setFailedVideos((current) =>
+                      new Set(current).add(failedIndex),
+                    );
                     console.error(
-                      "Could not load testimonial video.",
+                      "Could not load work video.",
                       event.currentTarget.currentSrc,
+                      event.currentTarget.error,
                     );
                   }}
-                  onPause={() => {
-                    setPlayingVideos((current) => {
-                      const next = new Set(current);
-                      next.delete(index);
-                      return next;
-                    });
-                    setSoundIndex((current) =>
-                      current === index ? -1 : current,
-                    );
-                  }}
+                  aria-label={`${video.name} video`}
                 />
-                {failedVideos.has(index) ? (
+                {failedVideos.has(index) && (
                   <span className="reel-error" role="status">
-                    Video temporarily unavailable
+                    Video couldn’t be played
                   </span>
-                ) : (
-                  <>
-                    <button
-                      className={`reel-play ${playingVideos.has(index) ? "is-playing" : ""}`}
-                      type="button"
-                      aria-label={
-                        playingVideos.has(index)
-                          ? `Pause ${video.name} video`
-                          : `Play ${video.name} video`
-                      }
-                      onClick={(event) => togglePlayback(event, index)}
-                    >
-                      {playingVideos.has(index) ? "Ⅱ" : "▶"}
-                    </button>
-                    <button
-                      className="reel-sound"
-                      type="button"
-                      aria-pressed={soundIndex === index}
-                      onClick={(event) => toggleSound(event, index)}
-                    >
-                      {soundIndex === index ? "Mute" : "Unmute"}
-                    </button>
-                  </>
                 )}
                 <span className="reel-caption">
                   <strong>{video.name}</strong>
                   <small>{video.role}</small>
                 </span>
+                <div className="reel-controls">
+                  <button
+                    className="reel-mute"
+                    type="button"
+                    aria-label={
+                      mutedVideos.has(index)
+                        ? `Unmute ${video.name} video`
+                        : `Mute ${video.name} video`
+                    }
+                    aria-pressed={!mutedVideos.has(index)}
+                    onClick={() => toggleVideoMute(index)}
+                  >
+                    {mutedVideos.has(index) ? "Unmute" : "Mute"}
+                  </button>
+                  <input
+                    className="reel-seek"
+                    type="range"
+                    min="0"
+                    max={Math.max(videoProgress[index].duration, 1)}
+                    step="0.1"
+                    value={Math.min(
+                      videoProgress[index].currentTime,
+                      Math.max(videoProgress[index].duration, 1),
+                    )}
+                    aria-label={`Seek ${video.name} video`}
+                    onChange={(event) =>
+                      seekVideo(index, event.target.value)
+                    }
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -996,7 +986,7 @@ export function WorkSection({ onApply }) {
           </button>
         </div>
         <p className="tap">
-          Videos autoplay muted. Select Unmute to hear the sound.
+          Videos autoplay muted. Tap Unmute to hear the sound.
         </p>
         <button className="btn" onClick={onApply}>
           Apply Now

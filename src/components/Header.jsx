@@ -76,7 +76,7 @@ export function Header({ onApply }) {
         <div className="hero-showreel">
           <video
             ref={heroVideoRef}
-            src="https://ik.imagekit.io/1chlmqpwh/SWATHI%20GYNEC%20MAM%20200K%20VIDEO_3.mp4"
+            src={`/videos/${encodeURIComponent("SWATHI GYNEC MAM 200K VIDEO_3.mp4")}`}
             loop
             playsInline
             preload="auto"

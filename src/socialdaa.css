@@ -287,12 +287,13 @@ section {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  padding: 50px 16px 16px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  top: 0;
+  padding: 16px 76px 40px 16px;
+  background: linear-gradient(rgba(0, 0, 0, 0.82), transparent);
   font-weight: 800;
   font-size: 15px;
   line-height: 1.3;
+  pointer-events: none;
 }
 .reel-caption strong,
 .reel-caption small {
@@ -302,6 +303,50 @@ section {
   font-weight: 400;
   color: #b4b4bc;
   font-size: 12px;
+}
+.reel-controls {
+  position: absolute;
+  z-index: 4;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(8px);
+}
+.reel-mute {
+  flex: 0 0 auto;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.reel-seek {
+  flex: 1;
+  min-width: 0;
+  height: 4px;
+  margin: 0;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+.reel-error {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 16px;
+  right: 16px;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
 }
 .tap {
   margin: 24px 0 28px;
@@ -933,60 +978,9 @@ footer a {
   object-fit: cover;
   background: #09090b;
 }
-.reel-play {
-  position: absolute;
-  z-index: 2;
-  left: 50%;
-  top: 50%;
-  width: 58px;
-  height: 58px;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  cursor: pointer;
-  font-size: 22px;
-  transition: opacity 0.2s;
-}
-.reel-play.is-playing {
-  opacity: 0;
-  pointer-events: none;
-}
-.reel:hover .reel-play.is-playing,
-.reel-play.is-playing:focus-visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-.reel-error {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 16px;
-  right: 16px;
-  transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 13px;
-  text-align: center;
-}
 .reel-caption {
   z-index: 3;
-}
-.reel-sound {
-  position: absolute;
-  z-index: 3;
-  top: 12px;
-  right: 12px;
-  padding: 7px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.62);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
+  pointer-events: none;
 }
 .urgency-section {
   background: var(--surface);
@@ -1958,10 +1952,6 @@ footer a {
 
 .landing-page .reel video {
   background: transparent;
-}
-
-.landing-page .reel-error {
-  color: var(--muted);
 }
 
 .landing-page .reel-placeholder {
