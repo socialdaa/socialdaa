@@ -412,11 +412,11 @@ export default function ApplicationOverlay({ open, onClose }) {
             >
               <option value="">Select a range</option>
 
-              <option>₹10 lakh – ₹20 lakhs</option>
-              <option>₹20 lakh – ₹30 lakhs</option>
-              <option>₹30 lakh – ₹40 lakhs</option>
-              <option>₹40 lakh – ₹50 lakhs</option>
-              <option>₹50 lakh – ₹1 crore</option>
+              <option>₹10 lakh – ₹20 lakhs (Monthly)</option>
+              <option>₹20 lakh – ₹30 lakhs (Monthly)</option>
+              <option>₹30 lakh – ₹40 lakhs (Monthly)</option>
+              <option>₹40 lakh – ₹50 lakhs (Monthly)</option>
+              <option>₹50 lakh – ₹1 crore (Monthly)</option>
             </select>
 
             <label>
