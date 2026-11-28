@@ -1265,6 +1265,14 @@ export function Footer() {
           <a className="logo" href="#top">
             <img src="/logo.png" alt="Socialdaa" />
           </a>
+          <a
+            href="https://www.instagram.com/socialdaa/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit Socialdaa on Instagram"
+          >
+            Instagram
+          </a>
           <a href="#">Terms &amp; Conditions</a>
         </div>
         <p className="footer-fine">

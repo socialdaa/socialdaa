@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 export function Header({ onApply }) {
   const heroVideoRef = useRef(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
 
   const toggleHeroSound = () => {
     const video = heroVideoRef.current;
@@ -27,22 +27,25 @@ export function Header({ onApply }) {
     const video = heroVideoRef.current;
     if (!video) return;
 
-    const playMutedVideo = () => {
-      video.muted = true;
-      setIsMuted(true);
-      video.play().catch(() => {});
+    const playVideoWithSound = () => {
+      video.muted = false;
+      setIsMuted(false);
+      video.play().catch(() => {
+        video.muted = true;
+        setIsMuted(true);
+      });
     };
 
     const handleVisibilityChange = () => {
-      if (!document.hidden) playMutedVideo();
+      if (!document.hidden) playVideoWithSound();
     };
 
-    video.addEventListener("canplay", playMutedVideo);
+    video.addEventListener("canplay", playVideoWithSound);
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    playMutedVideo();
+    playVideoWithSound();
 
     return () => {
-      video.removeEventListener("canplay", playMutedVideo);
+      video.removeEventListener("canplay", playVideoWithSound);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
@@ -54,7 +57,6 @@ export function Header({ onApply }) {
           <video
             ref={heroVideoRef}
             src="https://ik.imagekit.io/1chlmqpwh/SWATHI%20GYNEC%20MAM%20200K%20VIDEO_3.mp4"
-            muted
             autoPlay
             loop
             playsInline
