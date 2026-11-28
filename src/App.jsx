@@ -93,6 +93,13 @@ function Home() {
 
       <FinalCta onApply={openApplication} />
       <Footer />
+      {!applicationOpen && (
+        <div className="mobile-strategy-cta">
+          <button className="btn" type="button" onClick={openApplication}>
+            Book Your Strategy Call
+          </button>
+        </div>
+      )}
 
       {/* <FloatingCta
         visible={floatingVisible && !applicationOpen}

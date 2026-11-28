@@ -622,6 +622,9 @@ footer a {
 .floating-cta.visible {
   transform: translate(0, 0);
 }
+.mobile-strategy-cta {
+  display: none;
+}
 .application-overlay {
   position: fixed;
   inset: 0;
@@ -2092,6 +2095,28 @@ footer a {
 
 .landing-page .application-phone-field > span {
   background: #0a0a0a;
+}
+
+@media (max-width: 767px) {
+  .mobile-strategy-cta {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 45;
+    display: flex;
+    justify-content: center;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.94) 32%);
+  }
+  .mobile-strategy-cta .btn {
+    width: min(100%, 520px);
+    min-height: 52px;
+    padding: 14px 20px;
+  }
+  .landing-page footer {
+    padding-bottom: 96px;
+  }
 }
 
 @media (max-width: 860px) {
